@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tutum-deployment
+  #  namespace: rancher-server
+  labels:
+    app: tutum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tutum
+  template:
+    metadata:
+      labels:
+        app: tutum
+    spec:
+      #      affinity:
+      #        nodeAffinity:
+      #          requiredDuringSchedulingIgnoredDuringExecution:
+      #            nodeSelectorTerms:
+      #              - matchExpressions:
+      #                  - key: failure-domain.beta.kubernetes.io/zone
+      #                    operator: In
+      #                    values:
+      #                      - "us-west-2a"
+      containers:
+        - name: tutum
+#          image: rancher/rancher
+          image: tutum/hello-world
+          ports:
+            - containerPort: 80
+#            - containerPort: 443
